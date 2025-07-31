@@ -35,6 +35,8 @@
             box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.2);
             margin: 2rem auto;
+            overflow-x: hidden;
+            position: relative;
         }
 
         header::before {
@@ -42,8 +44,6 @@
             position: absolute;
             padding: 20px; /* Adjusted padding for mobile */
             width: 90%; /* Ensure header does not exceed viewport width */
-            top: -50%;
-            left: -50%;
             width: 200%;
             height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
