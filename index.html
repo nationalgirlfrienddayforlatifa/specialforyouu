@@ -167,6 +167,27 @@
             margin-top: 2rem;
         }
 
+        /* Custom SweetAlert Styles */
+        .swal2-popup {
+            border-radius: 20px !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px) !important;
+        }
+        .swal2-title {
+            color: #ff6b8b !important;
+            font-size: 1.5rem !important;
+        }
+        .swal2-confirm {
+            background-color: #ff6b8b !important;
+            border: none !important;
+            border-radius: 50px !important;
+            padding: 10px 25px !important;
+        }
+        .swal2-cancel {
+            border-radius: 50px !important;
+            padding: 10px 25px !important;
+        }
+
         @keyframes floating {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
@@ -263,28 +284,39 @@ Teruslah jadi dirimu. Karena kamu yang sekarang, sudah sangat indah.</p>
     <footer>
         <p>Created By ripkiii</p>
     </footer>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        window.addEventListener('load', () => {
-  Swal.fire({
-      title: 'Do you want to play music in the background?',
-      // text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes',
-      cancelButtonText: 'No',
-  }).then((result) => {
-      if (result.isConfirmed) {
-          document.querySelector('.song').play();
-          animationTimeline();
-      } else {
-          animationTimeline();
-      }
-  });
-});
-
+     document.addEventListener('DOMContentLoaded', function() {
+            // Show the initial popup asking for music permission
+            Swal.fire({
+                title: 'Ada musiknya lo sayang',
+                text: 'Kamu mau idupinn musiknyaa?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Putar Musik',
+                cancelButtonText: 'Tidak, Terima Kasih',
+                customClass: {
+                    popup: 'swal2-popup-custom'
+                },
+                background: 'rgba(255, 255, 255, 0.95)',
+                backdrop: 'rgba(0, 0, 0, 0.5)'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const audio = document.querySelector('.song');
+                    
+                    // Many browsers require audio to be played after user interaction
+                    audio.play().catch(e => {
+                        Swal.fire({
+                            title: 'Oops!',
+                            text: 'Browser membutuhkan interaksi pengguna terlebih dahulu. Silakan klik tombol apa saja untuk memutar musik.',
+                            icon: 'info'
+                        }).then(() => {
+                            audio.play();
+                        });
+                    });
+                }
+            });
+            });
         function showMessages() {
             // Hide header and INSERT button
             document.getElementById('mainHeader').style.display = 'none';
