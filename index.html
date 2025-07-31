@@ -18,6 +18,8 @@
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
+            width: 100vw; /* Full width of the viewport */
+            height: 100vh; /* Full height of the viewport */
         }
 
         header {
@@ -38,6 +40,8 @@
         header::before {
             content: '';
             position: absolute;
+            padding: 20px; /* Adjusted padding for mobile */
+            width: 90%; /* Ensure header does not exceed viewport width */
             top: -50%;
             left: -50%;
             width: 200%;
